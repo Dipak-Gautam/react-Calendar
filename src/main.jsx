@@ -10,6 +10,8 @@ import AboutUs from "./screens/AboutUs.jsx";
 import ContactUs from "./screens/ContactUs.jsx";
 import Blog from "./screens/Blog.jsx";
 import RomanToNepali from "./screens/RomanToNepali.jsx";
+import { Provider } from "react-redux";
+import dateStore from "./store/index.js";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +31,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={dateStore}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );
