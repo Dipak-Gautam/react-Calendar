@@ -16,9 +16,19 @@ const calendarDataSlice = createSlice({
   initialState: null,
   reducers: {
     setCalendarData: (state, action) => {
-      console.log("Set calendar date called", action);
       state = action.payload;
-      console.log("check", state);
+      return state;
+    },
+  },
+});
+
+const activeDateCalendarSlice = createSlice({
+  name: "activeDateCalendar",
+  initialState: [null, null],
+  reducers: {
+    setActiveDateCalendar: (state, action) => {
+      state = action.payload;
+      return state;
     },
   },
 });
@@ -27,9 +37,11 @@ const dateStore = configureStore({
   reducer: {
     todaysDate: todaysDateSlice.reducer,
     calendarData: calendarDataSlice.reducer,
+    activeDateCalendar: activeDateCalendarSlice.reducer,
   },
 });
 
+export const activeDateCalendarAction = activeDateCalendarSlice.actions;
 export const calendarDataAction = calendarDataSlice.actions;
 export const todaysDateAction = todaysDateSlice.actions;
 export default dateStore;

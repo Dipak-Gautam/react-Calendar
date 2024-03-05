@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { GrFormPrevious } from "react-icons/gr";
 import { MdOutlineNavigateNext } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import { activeDateCalendarAction } from "../store";
 
 const CalendarHeading = () => {
-  let currentMonth = 11;
-  let currentyear = 2024;
-  const [calendarhead, setCalendarhead] = useState([currentMonth, currentyear]);
+  const currentDate = useSelector((store) => store.activeDateCalendar);
+
+  const dispatch = useDispatch();
+
+  let currentMonth = currentDate[0];
+  let currentyear = currentDate[1];
 
   const handleDateChangeNext = (month, year) => {
     let newmonth;
@@ -13,11 +18,15 @@ const CalendarHeading = () => {
     if (month === 12) {
       newmonth = 1;
       newyear = year + 1;
-      setCalendarhead([newmonth, newyear]);
+      dispatch(
+        activeDateCalendarAction.setActiveDateCalendar([newmonth, newyear])
+      );
     } else {
       newmonth = month + 1;
       newyear = year;
-      setCalendarhead([newmonth, newyear]);
+      dispatch(
+        activeDateCalendarAction.setActiveDateCalendar([newmonth, newyear])
+      );
     }
   };
   const handleDateChangePrev = (month, year) => {
@@ -26,11 +35,15 @@ const CalendarHeading = () => {
     if (month === 1) {
       newmonth = 12;
       newyear = year - 1;
-      setCalendarhead([newmonth, newyear]);
+      dispatch(
+        activeDateCalendarAction.setActiveDateCalendar([newmonth, newyear])
+      );
     } else {
       newmonth = month - 1;
       newyear = year;
-      setCalendarhead([newmonth, newyear]);
+      dispatch(
+        activeDateCalendarAction.setActiveDateCalendar([newmonth, newyear])
+      );
     }
   };
 
@@ -38,15 +51,15 @@ const CalendarHeading = () => {
     <>
       <div className="flex justify-between my-4 text-3xl font-semibold text-slate-600">
         <div className="flex">
-          <h1 className="">{calendarhead[0]}</h1>
-          <h1 className="mx-3">{calendarhead[1]}</h1>
+          <h1 className="">{currentMonth}</h1>
+          <h1 className="mx-3">{currentyear}</h1>
         </div>
         <div>
           <button>
             <GrFormPrevious
               className="bg-[#832161] text-white h-full mb-0"
               onClick={() => {
-                handleDateChangePrev(calendarhead[0], calendarhead[1]);
+                handleDateChangePrev(currentMonth, currentyear);
               }}
             />
           </button>
@@ -54,7 +67,7 @@ const CalendarHeading = () => {
             <MdOutlineNavigateNext
               className="bg-[#832161] text-white h-full mb-0"
               onClick={() => {
-                handleDateChangeNext(calendarhead[0], calendarhead[1]);
+                handleDateChangeNext(currentMonth, currentyear);
               }}
             />
           </button>

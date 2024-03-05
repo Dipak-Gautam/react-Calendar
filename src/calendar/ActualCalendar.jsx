@@ -1,11 +1,38 @@
 import React from "react";
 import Datebox from "./Datebox";
+import { useSelector } from "react-redux";
 
 const ActualCalendar = () => {
-  let a = 3;
-  let startday = -a + 1;
-  let totaldays = 30;
+  let d;
+  // necessary data calculation
+  const activeDate = useSelector((store) => store.activeDateCalendar);
+  const calendarData = useSelector((store) => store.calendarData);
+
+  if (activeDate === null || calendarData === null) {
+    return <></>;
+  }
+
+  // setting starting day and number of days for calander
+  let c = activeDate[0];
+  c < 10 ? (d = "0" + c.toString()) : (d = c.toString());
+
+  let sday = calendarData[d];
+  let a = sday[0]["week_day"];
+  console.log(sday);
+
+  let startday = -a - 1;
+  let totaldays = Object.entries(sday).length;
+  // let totaldays = 2;
   let i = 1;
+  // end of setting starting date
+
+  // calculation box
+  let data = sday;
+
+  let temp = data[27]["events"][0]["jtl"];
+
+  console.log("temp", temp);
+  // calculation box
   return (
     <div>
       <div>
@@ -22,7 +49,7 @@ const ActualCalendar = () => {
         <div className="grid grid-cols-7 text-center font-bold items-center">
           {(() => {
             let post = [];
-            while (startday < totaldays) {
+            while (startday < totaldays - 1) {
               startday++;
               post.push(
                 <Datebox
@@ -30,6 +57,9 @@ const ActualCalendar = () => {
                   startday={startday}
                   i={i}
                   totaldays={totaldays}
+                  data={sday}
+                  cmonth={c}
+                  cyear={activeDate[1]}
                 />
               );
               i++;
