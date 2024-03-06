@@ -2,10 +2,11 @@ import { configureStore, createSlice } from "@reduxjs/toolkit";
 
 const todaysDateSlice = createSlice({
   name: "todaysDate",
-  initialState: { day: 1, month: 11, year: 1111 },
+  initialState: { day: null, month: null, year: null },
   reducers: {
     setTodaysDate: (state, action) => {
       state = action.payload;
+
       return state;
     },
   },

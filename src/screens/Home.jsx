@@ -8,6 +8,8 @@ import {
 } from "../store";
 import { useDispatch } from "react-redux";
 import initialdata from "../data/2080-calendar.json";
+import EventComponent from "../component/EventComponent";
+import AddCoustomEvent from "../component/AddCoustomEvent";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -34,10 +36,15 @@ const Home = () => {
   return (
     <>
       <div className="mx-12 flex">
-        <TodayDate />
+        <div className="w-[30%] border-2 border-red-600">
+          <TodayDate />
+          <EventComponent />
+        </div>
+
         {/* clander starts here */}
         <div className="border-2 border-red-700 w-[70%] p-2">
           <CalendarMain />
+          <AddCoustomEvent />
         </div>
       </div>
     </>

@@ -1,12 +1,13 @@
 import React from "react";
 import { tithi } from "../constants/Tithi";
 
-const Datebox = ({ startday, i, totaldays, data, cmonth, cyear }) => {
+const Datebox = ({ startday, i, totaldays, data, cday, activeMonth }) => {
   let isholiday = false;
   let stithi;
   let eventstat = null;
   let englishdate;
   let eventName = "";
+  let isToday = false;
 
   // if (startday >= 0) {
   //   stithi = data[startday]["AD_date"]["tithi"];
@@ -18,19 +19,21 @@ const Datebox = ({ startday, i, totaldays, data, cmonth, cyear }) => {
     isholiday = true;
   }
 
+  if (activeMonth == true && cday == startday + 1) {
+    isToday = true;
+  }
+
   return (
     <>
       <div
         className={`h-24 border-2 border-black flex flex-col  ${
-          isholiday === true ? "text-red-600" : "text-black"
-        }  `}
+          isholiday === true ? "text-red-600" : "text-slate-600"
+        } ${isToday == true && "bg-cyan-300 "} `}
       >
         {/* tithi file start */}
-        <p className="text-[13px] flex  justify-end text-slate-600">
+        <p className="text-[13px] flex  justify-end">
           <span
-            className={`w-full text-center ${
-              isholiday === true ? "text-red-600" : " text-slate-600"
-            } ${
+            className={`w-full text-center  ${
               (startday >= 0) & (startday < totaldays) ? "block" : "hidden"
             } `}
           >
@@ -43,8 +46,6 @@ const Datebox = ({ startday, i, totaldays, data, cmonth, cyear }) => {
 
           <span
             className={`mr-1 ${
-              isholiday === true ? "text-red-600" : " text-slate-600"
-            } ${
               (startday >= 0) & (startday < totaldays) ? "block" : "hidden"
             } `}
           >
@@ -57,8 +58,8 @@ const Datebox = ({ startday, i, totaldays, data, cmonth, cyear }) => {
         </p>
         <p
           className={`mt-2 mb-1 text-2xl  ${
-            (startday >= 0) & (startday < totaldays) ? "block" : "hidden"
-          }`}
+            isholiday === true ? "text-red-600" : " text-black"
+          }  ${(startday >= 0) & (startday < totaldays) ? "block" : "hidden"}`}
         >
           {startday + 1}
         </p>
@@ -66,9 +67,9 @@ const Datebox = ({ startday, i, totaldays, data, cmonth, cyear }) => {
 
         {/* event start */}
         <p
-          className={` text-[13px] h-full flex items-end mx-auto leading-none mb-[5px] ${
-            isholiday === true ? "text-red-600" : " text-slate-600"
-          } ${(startday >= 0) & (startday < totaldays) ? "block" : "hidden"}`}
+          className={` text-[13px] h-full flex items-end mx-auto leading-none mb-[5px]  ${
+            (startday >= 0) & (startday < totaldays) ? "block" : "hidden"
+          }`}
         >
           {eventstat == 1 ? eventName : ""}
         </p>

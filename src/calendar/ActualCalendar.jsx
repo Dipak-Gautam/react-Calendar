@@ -4,13 +4,16 @@ import { useSelector } from "react-redux";
 
 const ActualCalendar = () => {
   let d;
+  let activeMonth = false;
   // necessary data calculation
   const activeDate = useSelector((store) => store.activeDateCalendar);
+
   const calendarData = useSelector((store) => store.calendarData);
 
   if (activeDate === null || calendarData === null) {
     return <></>;
   }
+  const todaysDate = useSelector((store) => store.todaysDate);
 
   // setting starting day and number of days for calander
   let c = activeDate[0];
@@ -18,32 +21,32 @@ const ActualCalendar = () => {
 
   let sday = calendarData[d];
   let a = sday[0]["week_day"];
-  console.log(sday);
 
   let startday = -a - 1;
   let totaldays = Object.entries(sday).length;
-  // let totaldays = 2;
+
   let i = 1;
+
+  if (activeDate[0] === todaysDate.month && activeDate[1] === todaysDate.year) {
+    activeMonth = true;
+  }
+
   // end of setting starting date
 
   // calculation box
-  let data = sday;
 
-  let temp = data[27]["events"][0]["jtl"];
-
-  console.log("temp", temp);
   // calculation box
   return (
     <div>
       <div>
-        <div className="grid grid-cols-7 text-center font-bold h-9 ">
-          <div className="border-2 border-black">Sun </div>
-          <div className="border-2 border-black">Mon </div>
-          <div className="border-2 border-black">Tue </div>
-          <div className="border-2 border-black">Wed </div>
-          <div className="border-2 border-black">Thu </div>
-          <div className="border-2 border-black">Fri </div>
-          <div className="border-2 border-black text-red-600">Sat</div>
+        <div className="grid grid-cols-7 text-center font-bold h-9">
+          <div className="border-2 border-black p-1">आइतबार </div>
+          <div className="border-2 border-black p-1">सोमबार </div>
+          <div className="border-2 border-black p-1">मङ्गलबार </div>
+          <div className="border-2 border-black p-1">बुधबार </div>
+          <div className="border-2 border-black p-1">बिहिबार </div>
+          <div className="border-2 border-black p-1">शुक्रबार </div>
+          <div className="border-2 border-black p-1 text-red-600">शनिबार</div>
         </div>
         {/* dates below */}
         <div className="grid grid-cols-7 text-center font-bold items-center">
@@ -58,8 +61,8 @@ const ActualCalendar = () => {
                   i={i}
                   totaldays={totaldays}
                   data={sday}
-                  cmonth={c}
-                  cyear={activeDate[1]}
+                  cday={todaysDate.day}
+                  activeMonth={activeMonth}
                 />
               );
               i++;
