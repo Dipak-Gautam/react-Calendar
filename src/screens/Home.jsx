@@ -36,13 +36,13 @@ const Home = () => {
   return (
     <>
       <div className="mx-12 flex">
-        <div className="w-[30%] border-2 border-red-600">
+        <div className="w-[30%] border-2">
           <TodayDate />
           <EventComponent />
         </div>
 
         {/* clander starts here */}
-        <div className="border-2 border-red-700 w-[70%] p-2">
+        <div className="border-2 w-[70%] p-2">
           <CalendarMain />
           <AddCoustomEvent />
         </div>

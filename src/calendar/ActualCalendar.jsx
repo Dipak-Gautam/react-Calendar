@@ -10,10 +10,10 @@ const ActualCalendar = () => {
 
   const calendarData = useSelector((store) => store.calendarData);
 
+  const todaysDate = useSelector((store) => store.todaysDate);
   if (activeDate === null || calendarData === null) {
     return <></>;
   }
-  const todaysDate = useSelector((store) => store.todaysDate);
 
   // setting starting day and number of days for calander
   let c = activeDate[0];

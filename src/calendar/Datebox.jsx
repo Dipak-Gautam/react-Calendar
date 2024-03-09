@@ -9,12 +9,12 @@ const Datebox = ({ startday, i, totaldays, data, cday, activeMonth }) => {
   let eventName = "";
   let isToday = false;
 
-  // if (startday >= 0) {
-  //   stithi = data[startday]["AD_date"]["tithi"];
-  //   englishdate = data[startday]["ad"].split("-")[2];
-  //   eventstat = data[startday]["events"][0]["holiday_status"];
-  //   eventName = data[startday]["events"][0]["jtl"];
-  // }
+  if (startday >= 0) {
+    stithi = data[startday]["AD_date"]["tithi"];
+    englishdate = data[startday]["ad"].split("-")[2];
+    eventstat = data[startday]["events"][0]["holiday_status"];
+    eventName = data[startday]["events"][0]["jtl"];
+  }
   if (i % 7 === 0 || eventstat === 1) {
     isholiday = true;
   }

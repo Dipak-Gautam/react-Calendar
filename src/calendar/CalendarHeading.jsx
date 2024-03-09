@@ -17,10 +17,10 @@ import { nepaliYears } from "../constants/nepaliYears";
 const CalendarHeading = () => {
   const currentDate = useSelector((store) => store.activeDateCalendar);
 
-  // if (currentDate[0] === null) {
-  //   console.log("loadingspinner");
-  //   return <></>;
-  // }
+  if (currentDate[0] === null) {
+    console.log("loadingspinner");
+    return <></>;
+  }
   // year change calculation
   const yearchanged = (newyear) => {
     newyear === 2075 && dispatch(calendarDataAction.setCalendarData(d2075));
